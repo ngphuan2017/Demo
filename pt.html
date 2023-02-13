@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Phuong trinh</title>
+        <script>
+            function pt(){
+                var a = document.getElementById("Ida").value;
+                var b = document.getElementById("Idb").value;
+                if(a == 0)
+                    if(b == 0)
+                        alert("Phuong trinh vo so nghiem");
+                    else
+                        alert("Phuong trinh vo nghiem");
+                else
+                    alert("x = " +(-b/a));
+
+            }
+        </script>
+    </head>
+    <body>
+        <h1>ax + b = 0</h1>
+        <input type="text" id="Ida" placeholder="Nhập a"/><br>
+        <input type="text" id="Idb" placeholder="Nhập b"/><br>
+        <input type="button" value="Kết quả" onclick="pt()"/><br>
+    </body>
+</html>

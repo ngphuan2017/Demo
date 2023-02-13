@@ -1,0 +1,100 @@
+a:link {
+    text-decoration: none;
+    color: black;
+}
+a:visited {
+    color: red;
+}
+a:hover {
+    text-decoration: underline;
+    background-color: lightblue;
+    color: green;
+}
+div.p {
+    background-color: lightblue;
+    color: green;
+    width: 300px;
+    height: 400px;
+    overflow: auto;
+    float: left;
+}
+a#go {
+    text-decoration: none;
+    background-color: rgb(50, 200, 255, 0.5);
+    position: fixed;
+    text-align: center;
+    width: 75px;
+    right: 10px;
+    bottom: 10px;
+}
+div.fix {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed blue;
+}
+div.fixs {
+    display: flex;
+    width: 400px;
+    height: 400px;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+a#went {
+    text-decoration: none;
+    background-color: rgb(50, 200, 255, 0.5);
+    position: fixed;
+    text-align: center;
+    width: 75px;
+    top: 10px;
+    right: 10px;
+}
+div.color {
+    width: 500px;
+    height: 500px;
+    background-image: radial-gradient(red, yellow, lightblue, 
+    green, violet, white, blue, brown, lightgreen);
+    transform: rotate(45deg) scale(0.5);
+}
+div.color:hover {
+    background-image: linear-gradient(blue, red);
+}
+div.transition {
+    width: 400px;
+    height: 400px;
+    background-color: red;
+    transform: rotate(75deg) skew(15deg) scale(0.5);
+    transition: background-color ease-in-out 5s;
+}
+div.transition:hover {
+    background-color: blue;
+}
+@keyframes doimau {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: blue;
+    }
+}
+h1.subject {
+    animation: doimau 1s infinite;
+    text-align: center;
+}
+body {
+    background-color: lightblue;
+}
+@media screen and (max-width:1200px) {
+    body {
+        background-color: aqua;
+    }
+}
+@media screen and (max-width:800px) {
+    body {
+        background-color: lightgreen;
+    }
+}
+@media screen and (max-width:400px) {
+    body {
+        background-color: yellow;
+    }
+}

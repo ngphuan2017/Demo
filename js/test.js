@@ -1,0 +1,3 @@
+function pt() {
+    alert("Hello");
+}

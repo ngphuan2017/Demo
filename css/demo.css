@@ -1,0 +1,74 @@
+body{
+    background-image: url(../ou-banner.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #88a7cf;
+    color: black;
+}
+td{
+    font-weight: bold;
+}
+#hello{
+    text-decoration: underline;
+    margin-bottom: 1px;
+}
+ul li:first-child{
+    list-style-image: url(../faviconn.png);
+}
+ul li:nth-child(2){
+    list-style-image: url(../faviconn.png);
+}
+table.table{
+    border-collapse: collapse;
+ 
+}
+table.table tr:hover{
+    background-color: lightblue;
+    color: green;
+}
+a:link{
+    color: yellow;
+}
+a:active{
+    color: violet;
+}
+a:hover{
+    color: tomato;
+    text-decoration: underline;
+}
+/*p, div {
+    color: blue;
+}thiết lập cả thẻ p và div
+h1 span{
+    color: green;
+}lấy tất cả thẻ span là con thẻ h1
+body > span{
+    color: red;
+}lấy thẻ span là con trực tiếp của thẻ body
+body + span{
+    color:black;
+}lấy thẻ span ngay sau thẻ body
+body ~ span{
+    color: white;
+}lấy tất cả thẻ con cháu span của thẻ body
+p#demo{
+    background-color: white;
+}lấy đúng thẻ p có id là demo
+#demo p{
+    color: yellow;
+}lấy những thẻ p là con của thẻ có id là demo
+p.game{
+    color: pink;
+}lấy tất cả thẻ p có class là game
+.game.online{
+    color: gold;
+}lấy tất cả thẻ có cả 2 class là game và online
+.game .online{
+    color: gray;
+}lấy các thẻ có class online trong các thẻ class game
+h1[title="Xin chào!!!"]{
+    color: blue;
+}lấy thẻ p có thuộc tính title là xin chào
+*/
+ 
