@@ -1,26 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+<meta name="description" content="A Gantt chart that supports zooming into the timeline."/> 
+<link rel="stylesheet" href="../Demo/css/goSamples.css"/> 
+<!-- Copyright 1998-2023 by Northwoods Software Corporation. -->
+<title>Gantt chart</title>
+</head>
 
-  <!DOCTYPE html>
-  <html lang="en">
-  <body>
-  <script src="https://unpkg.com/gojs@2.2.21/release/go.js"></script>
-  <p>
-    This is a minimalist HTML and JavaScript skeleton of the GoJS Sample
-    <a href="https://gojs.net/latest/samples/gantt.html">gantt.html</a>. It was automatically generated from a button on the sample page,
-    and does not contain the full HTML. It is intended as a starting point to adapt for your own usage.
-    For many samples, you may need to inspect the
-    <a href="https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/gantt.html">full source on Github</a>
-    and copy other files or scripts.
-  </p>
-  <!-- //////////////////////////////////////////////////////////////// -->
-  <div id="allSampleContent" class="p-4 w-full">
+<body>
+  <!-- This top nav is not part of the sample code -->
+  <nav id="navTop" class="w-full z-30 top-0 text-white bg-nwoods-primary">
+    <div class="w-full container max-w-screen-lg mx-auto flex flex-wrap sm:flex-nowrap items-center justify-between mt-0 py-2">
+      <div class="md:pl-4">
+        <a class="text-white hover:text-white no-underline hover:no-underline
+        font-bold text-2xl lg:text-4xl rounded-lg hover:bg-nwoods-secondary " href="../">
+          <h1 class="my-0 p-1 ">GoJS</h1>
+        </a>
+      </div>
+      <button id="topnavButton" class="rounded-lg sm:hidden focus:outline-none focus:ring" aria-label="Navigation">
+        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+          <path id="topnavOpen" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+          <path id="topnavClosed" class="hidden" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div id="topnavList" class="hidden sm:block items-center w-auto mt-0 text-white p-0 z-20">
+        <ul class="list-reset list-none font-semibold flex justify-end flex-wrap sm:flex-nowrap items-center px-0 pb-0">
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="../learn/">Learn</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="../samples/">Samples</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="../intro/">Intro</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="../api/">API</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="https://www.nwoods.com/products/register.html">Register</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="../download.html">Download</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="https://forum.nwoods.com/c/gojs/11">Forum</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="https://www.nwoods.com/contact.html"
+           target="_blank" rel="noopener" onclick="getOutboundLink('https://www.nwoods.com/contact.html', 'contact');">Contact</a></li>
+          <li class="p-1 sm:p-0"><a class="topnav-link" href="https://www.nwoods.com/sales/index.html"
+           target="_blank" rel="noopener" onclick="getOutboundLink('https://www.nwoods.com/sales/index.html', 'buy');">Buy</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-b border-gray-600 opacity-50 my-0 py-0" />
+  </nav>
+  <div class="md:flex flex-col md:flex-row md:min-h-screen w-full max-w-screen-xl mx-auto">
+    <div id="navSide" class="flex flex-col w-full md:w-48 text-gray-700 bg-white flex-shrink-0"></div>
+    <!-- * * * * * * * * * * * * * -->
+    <!-- Start of GoJS sample code -->
+    
+    <script src="../Demo/js/go.js"></script>
+    <div id="allSampleContent" class="p-4 w-full">
 <div id="sample">
   <div style="width: 100%; display: flex; justify-content: space-between; border: solid 1px black">
-    <div id="myTasksDiv" style="width: 280px; margin-right: 2px; border-right: 1px solid black; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); cursor: auto; font: 13px sans-serif;"><canvas tabindex="0" width="348" height="478" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 279px; height: 383px; cursor: auto;">This text is displayed if your browser does not support the Canvas HTML element.</canvas><div style="position: absolute; overflow: auto; width: 279px; height: 400px; z-index: 1;"><div style="position: absolute; width: 400px; height: 1px;"></div></div></div>
-    <div id="myGanttDiv" style="flex-grow: 1; height: 400px; position: relative; -webkit-tap-highlight-color: rgba(255, 255, 255, 0); cursor: auto;"><canvas tabindex="0" width="943" height="478" style="position: absolute; top: 0px; left: 0px; z-index: 2; user-select: none; touch-action: none; width: 755px; height: 383px; cursor: auto;">This text is displayed if your browser does not support the Canvas HTML element.</canvas><div style="position: absolute; overflow: auto; width: 772px; height: 400px; z-index: 1;"><div style="position: absolute; width: 1089px; height: 528px;"></div></div></div>
+    <div id="myTasksDiv" style="width: 280px; margin-right: 2px; border-right: solid 1px black"></div>
+    <div id="myGanttDiv" style="flex-grow: 1; height: 400px"></div>
   </div>
   <div id="slider">
     <label>Spacing:</label>
-    <input id="widthSlider" type="range" min="8" max="24" value="12" oninput="rescale()">
+    <input id="widthSlider" type="range" min="8" max="24" value="12" oninput="rescale()"/>
   </div>
   <p>
     This sample demonstrates a simple Gantt chart.
@@ -29,66 +66,13 @@
   <p>
     You can zoom in on the diagram by changing the "Spacing" value,
     which scales the diagram using a data binding function for nodes' widths and locations.
-    This is in place of changing the <a href="../api/symbols/Diagram.html#scale" target="api">Diagram.scale</a>.
+    This is in place of changing the <a>Diagram.scale</a>.
   </p>
   <p>
     The current model in JSON format, automatically updated as the diagram is modified:
   </p>
-  <textarea id="mySavedModel" style="width:100%;height:250px">{ "class": "GraphLinksModel",
-  "modelData": {"origin":1531540800000},
-  "nodeDataArray": [
-{"key":0,"text":"CNTT","start":0,"duration":85,"isTreeExpanded":true},
-{"key":1,"text":"Software Developer","color":"darkgreen","start":0,"duration":19.000000000000014,"isTreeExpanded":true},
-{"key":11,"text":"Request 01","color":"green","duration":5,"start":0,"isTreeExpanded":true},
-{"key":12,"text":"Request 02","color":"green","start":7,"duration":12.000000000000016,"isTreeExpanded":true},
-{"key":121,"text":"Cho duyet","color":"lightgreen","duration":3,"start":7,"isTreeExpanded":true},
-{"key":122,"text":"Dang tuyen","color":"lightgreen","duration":5,"start":10,"isTreeExpanded":true},
-{"key":123,"text":"Da tuyen","color":"lightgreen","duration":4,"start":15.000000000000016,"isTreeExpanded":true},
-{"key":2,"text":"Task 2","color":"darkblue","start":10,"duration":40,"isTreeExpanded":true},
-{"key":21,"text":"Task 2.1","color":"blue","duration":15,"start":10,"isTreeExpanded":true},
-{"key":22,"text":"Task 2.2","color":"goldenrod","start":25,"duration":14,"isTreeExpanded":true},
-{"key":221,"text":"Task 2.2.1","color":"yellow","duration":8,"start":25,"isTreeExpanded":true},
-{"key":222,"text":"Task 2.2.2","color":"yellow","duration":6,"start":33,"isTreeExpanded":true},
-{"key":23,"text":"Task 2.3","color":"darkorange","start":39,"duration":11,"isTreeExpanded":true},
-{"key":231,"text":"Task 2.3.1","color":"orange","duration":11,"start":39,"isTreeExpanded":true},
-{"key":3,"text":"Task 3","color":"maroon","start":50,"duration":35,"isTreeExpanded":true},
-{"key":31,"text":"Task 3.1","color":"brown","duration":10,"start":50,"isTreeExpanded":true},
-{"key":32,"text":"Task 3.2","color":"brown","start":60,"duration":25,"isTreeExpanded":true},
-{"key":321,"text":"Task 3.2.1","color":"lightsalmon","duration":8,"start":60,"isTreeExpanded":true},
-{"key":322,"text":"Task 3.2.2","color":"lightsalmon","duration":3,"start":68,"isTreeExpanded":true},
-{"key":323,"text":"Task 3.2.3","color":"lightsalmon","duration":7,"start":71,"isTreeExpanded":true},
-{"key":324,"text":"Task 3.2.4","color":"lightsalmon","duration":5,"start":71,"isTreeExpanded":true},
-{"key":325,"text":"Task 3.2.5","color":"lightsalmon","duration":4,"start":76,"isTreeExpanded":true},
-{"key":326,"text":"Task 3.2.6","color":"lightsalmon","duration":5,"start":80,"isTreeExpanded":true},
-{"key":-24,"text":"Cho duyet","color":"green","duration":5,"start":0}
-],
-  "linkDataArray": [
-{"from":0,"to":1},
-{"from":1,"to":11},
-{"from":1,"to":12},
-{"from":12,"to":121},
-{"from":12,"to":122},
-{"from":12,"to":123},
-{"from":0,"to":2},
-{"from":2,"to":21},
-{"from":2,"to":22},
-{"from":22,"to":221},
-{"from":22,"to":222},
-{"from":2,"to":23},
-{"from":23,"to":231},
-{"from":0,"to":3},
-{"from":3,"to":31},
-{"from":3,"to":32},
-{"from":32,"to":321},
-{"from":32,"to":322},
-{"from":32,"to":323},
-{"from":32,"to":324},
-{"from":32,"to":325},
-{"from":32,"to":326},
-{"from":11,"to":2,"category":"Dep"},
-{"from":11,"to":-24}
-]}</textarea>
-<p class="text-xs">GoJS version 2.2.21. Copyright 1998-2022 by Northwoods Software.</p></div>
+  <textarea id="mySavedModel" style="width:100%;height:250px"></textarea>
+</div>
 <script id="code">
 
 // Custom Layout for myGantt Diagram
@@ -541,17 +525,18 @@ myGantt.linkTemplateMap.add("Dep",
 const myModel = new go.GraphLinksModel(
   {
     modelData: {
-      origin: 1531540800000,  // new Date(2018, 6, 14);
+      origin: 1531540800000,  // new Date(2018, 6, 14); //1.492.992.000.000 + 15.552.000.000 + 1.209.600.000
     },
     nodeDataArray:
       [
+      //{key: 'BOD', text: 'Ban Giám Đốc'}, {key: 'CNTT', text: 'Công nghệ thông tin'}, {key: 'HCNS', text: 'Hành chính Nhân sự'}, {key: 'KHOV', text: 'Kho vận'}, {key: 'THKE', text: 'Thiết kế'},{key: '47', text: 'Editor'}, {key: '48', text: 'Editor'}, {key: '50', text: 'Editor'}, {key: '54', text: 'IT Support'}, {key: '55', text: 'Admin'}, {key: '56', text: 'IT Developer'}, {key: '57', text: 'Nhân viên Stylist'}, {key: '60', text: 'IT ERP Support'}, {key: '61', text: '.'}, {key: '62', text: 'IT Dev'}, {key: '63', text: 'Nhân viên Hành chánh'},{key: '471', text: 'Chờ duyệt'}, {key: '472', text: 'Đang tuyển'}, {key: '473', text: 'Đã tuyển'}, {key: '481', text: 'Chờ duyệt'}, {key: '501', text: 'Chờ duyệt'}, {key: '502', text: 'Đang tuyển'}, {key: '541', text: 'Chờ duyệt'}, {key: '542', text: 'Đang tuyển'}, {key: '543', text: 'Đã tuyển'}, {key: '551', text: 'Chờ duyệt'}, {key: '552', text: 'Đang tuyển'}, {key: '561', text: 'Chờ duyệt'}, {key: '562', text: 'Đang tuyển'}, {key: '571', text: 'Chờ duyệt'}, {key: '572', text: 'Đang tuyển'}, {key: '573', text: 'Đã tuyển'}, {key: '601', text: 'Chờ duyệt'}, {key: '602', text: 'Đang tuyển'}, {key: '611', text: 'Chờ duyệt'}, {key: '621', text: 'Chờ duyệt'}, {key: '622', text: 'Đang tuyển'}, {key: '623', text: 'Đã tuyển'}, {key: '631', text: 'Chờ duyệt'}, {key: '632', text: 'Đang tuyển'},
         { key: 0, text: "Project X" },
-          { key: 1, text: "Task 1", color: "darkgreen" },
-            { key: 11, text: "Task 1.1", color: "green", duration: convertDaysToUnits(7) },
+          { key: 1, text: "Task 1", color: "darkgreen"},
+            { key: 11, text: "Task 1.1", color: "green", duration: 7 },
             { key: 12, text: "Task 1.2", color: "green" },
-              { key: 121, text: "Task 1.2.1", color: "lightgreen", duration: convertDaysToUnits(3) },
-              { key: 122, text: "Task 1.2.2", color: "lightgreen", duration: convertDaysToUnits(5) },
-              { key: 123, text: "Task 1.2.3", color: "lightgreen", duration: convertDaysToUnits(4) },
+              { key: 121, text: "Task 1.2.1", color: "lightgreen", duration: 'convertDaysToUnits(3)' },
+              { key: 122, text: "Task 1.2.2", color: "lightgreen", duration: 'convertDaysToUnits(5)' },
+              { key: 123, text: "Task 1.2.3", color: "lightgreen", duration: 'convertDaysToUnits(4)' },
           { key: 2, text: "Task 2", color: "darkblue" },
             { key: 21, text: "Task 2.1", color: "blue", duration: convertDaysToUnits(15), start: convertDaysToUnits(10) },
             { key: 22, text: "Task 2.2", color: "goldenrod" },
@@ -571,6 +556,7 @@ const myModel = new go.GraphLinksModel(
       ],
     linkDataArray:
       [
+      //{from: 'BOD', to: '50'}, {from: 'BOD', to: '61'}, {from: 'CNTT', to: '48'}, {from: 'CNTT', to: '54'}, {from: 'CNTT', to: '55'}, {from: 'CNTT', to: '56'}, {from: 'CNTT', to: '60'}, {from: 'CNTT', to: '62'}, {from: 'HCNS', to: '63'}, {from: 'KHOV', to: '57'}, {from: 'THKE', to: '47'},{from: '47', to: '471'}, {from: '47', to: '472'}, {from: '47', to: '473'}, {from: '48', to: '481'}, {from: '50', to: '501'}, {from: '50', to: '502'}, {from: '54', to: '541'}, {from: '54', to: '542'}, {from: '54', to: '543'}, {from: '55', to: '551'}, {from: '55', to: '552'}, {from: '56', to: '561'}, {from: '56', to: '562'}, {from: '57', to: '571'}, {from: '57', to: '572'}, {from: '57', to: '573'}, {from: '60', to: '601'}, {from: '60', to: '602'}, {from: '61', to: '611'}, {from: '62', to: '621'}, {from: '62', to: '622'}, {from: '62', to: '623'}, {from: '63', to: '631'}, {from: '63', to: '632', category: "Dep" },
         { from: 0, to: 1 },
         { from: 1, to: 11 },
         { from: 1, to: 12 },
@@ -649,6 +635,11 @@ myModel.addChangedListener(e => {
   }
 });
 </script>
-    <p><a href="https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/gantt.html" target="_blank">View this sample page's source on GitHub</a></p></div>
-  </body>
-  </html>
+    </div>
+    <!-- * * * * * * * * * * * * * -->
+    <!--  End of GoJS sample code  -->
+  </div>
+</body>
+<!--  This script is part of the gojs.net website, and is not needed to run the sample -->
+<script src="../Demo/js/goSamples.js"></script>
+</html>
